@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	
+	<enumtypes>
+		<enumtype code="ExamResultEnum" autocreate="true" generate="true">
+			<value code="PASSED"/>
+			<value code="REJECTED"/>					
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+		<relation code="Professor2SubjectRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="professor" type="Professor" cardinality="one"/>
+			<targetElement qualifier="subjects" type="Subject" cardinality="many"/>
+		</relation>
+		<relation code="Student2ExamRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="student" type="Student" cardinality="one"/>
+			<targetElement qualifier="exams" type="Exam" cardinality="many"/>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="Individual" autocreate="true" generate="true">
+		<description>Represents </description>
+			<deployment table="Individual" typecode="20051" />
+			<attributes>
+				<attribute qualifier="serialNumber" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="fullName" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="birthDate" type="java.util.Date">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Professor" extends="Individual" autocreate="true" generate="true">
+		<description>Represents </description>
+			<deployment table="Professor" typecode="20052" />
+		</itemtype>
+		<itemtype code="Student" extends="Individual" autocreate="true" generate="true">
+		<description>Represents </description>
+			<deployment table="Student" typecode="20053" />
+		</itemtype>	
+		
+		<itemtype code="Subject" autocreate="true" generate="true">
+			<description>Represents </description>
+			<deployment table="Subject" typecode="20054" />
+			<attributes>
+				<attribute qualifier="uid" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="program" type="localized:java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property">
+					<columntype><value>HYBRIS.LONG_STRING</value></columntype>
+					</persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Exam" autocreate="true" generate="true">
+			<description>Represents </description>
+			<deployment table="Exam" typecode="20055" />
+			<attributes>
+				<attribute qualifier="uid" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="result" type="ExamResultEnum">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="grade" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+					
+				</attribute>
+				<attribute qualifier="subject" type="Subject">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+					
+				</attribute>
+			</attributes>
+		</itemtype>
+	</itemtypes>
+</items>
