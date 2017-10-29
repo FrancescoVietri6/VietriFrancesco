@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+	
+	<bean class="my.cycleracingcoreuiip.data.StageRaceData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="country" type="String"/>
+	</bean>
+
+	<bean class="my.cycleracingcoreuiip.data.StageData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="stageNumber" type="Integer"/>
+		<property name="type" type="String"/>
+		<property name="length" type="String"/>
+		<property name="date" type="java.util.Date"/>
+		<property name="stageRace" type="my.cycleracingcoreuiip.data.StageRaceData"/>
+	</bean>
+	
+	<bean class="my.cycleracingcoreuiip.data.CyclistData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="surname" type="String"/>
+		<property name="nationality" type="String"/>
+	</bean>
+	
+	<bean class="my.cycleracingcoreuiip.data.StageRankingData">
+		<property name="id" type="String"/>
+		<property name="time" type="Integer"/>
+		<property name="position" type="Integer"/>
+		<property name="retired" type="Boolean"/>
+		<property name="stageRace" type="my.cycleracingcoreuiip.data.StageRaceData"/>
+		<property name="cyclist" type="my.cycleracingcoreuiip.data.CyclistData"/>
+		<property name="stage" type="my.cycleracingcoreuiip.data.StageData"/>
+	</bean>
+	
+	<bean class="my.cycleracingcoreuiip.data.CyclistRankingData">
+		<property name="id" type="String"/>
+		<property name="time" type="Integer"/>
+		<property name="position" type="Integer"/>
+		<property name="stageRace" type="my.cycleracingcoreuiip.data.StageRaceData"/>
+		<property name="cyclist" type="my.cycleracingcoreuiip.data.CyclistData"/>
+		<property name="stage" type="my.cycleracingcoreuiip.data.StageData"/>
+	</bean>
+	
+	
+</beans>
