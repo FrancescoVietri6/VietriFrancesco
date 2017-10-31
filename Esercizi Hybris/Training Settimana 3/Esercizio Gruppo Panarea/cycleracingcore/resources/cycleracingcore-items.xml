@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<relations>
+	
+
+	<!-- relazione 1-n tra StageRace e Stage -->
+	<relation localized="false" code="StageRace2StageRelation">
+		<sourceElement type="StageRace" qualifier="stageRace"
+			cardinality="one">
+			<modifiers optional="true" />
+		</sourceElement>
+		<targetElement type="Stage" qualifier="stage"
+			cardinality="many">
+			<modifiers optional="true" />
+		</targetElement>
+	</relation>
+
+	<!-- relazione 1-n tra Stage e StageRanking -->
+	<relation localized="false" code="Stage2StageRankingtRelation">
+		<sourceElement type="Stage" qualifier="stage"
+			cardinality="one">
+			<modifiers optional="true" />
+		</sourceElement>
+		<targetElement type="StageRanking" qualifier="stageRanking"
+			cardinality="many">
+			<modifiers optional="true" />
+		</targetElement>
+	</relation>
+
+
+<!-- relazione 1-n tra Team e Cyclist -->
+	<relation localized="false" code="Team2CyclistRelation">
+		<sourceElement type="CyclistTeam" qualifier="cyclistTeam"
+			cardinality="one">
+			<modifiers optional="true" />
+		</sourceElement>
+		<targetElement type="Cyclist" qualifier="cyclist"
+			cardinality="many">
+			<modifiers optional="true" />
+		</targetElement>
+	</relation>
+</relations>
+
+
+	
+		<!-- itemtype of stageRace  -->
+			
+			<itemtypes>
+
+		<itemtype code="StageRace" autocreate="true" generate="true">
+			<deployment table="StageRace" typecode="15698" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="numberStage" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="year" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="endDate" type="java.util.Date">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		<!-- itemtype of Person table -->
+		
+		<itemtype code="Person" autocreate="true" generate="true">
+			<deployment table="Person" typecode="15621" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="surname" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				</attributes>
+		</itemtype>
+		
+		<!-- itemtype of Cyclist table -->
+		
+		<itemtype code="Cyclist" extends="Person"  autocreate="true" generate="true">
+			<deployment table="Cyclist" typecode="15888" />
+			<attributes>
+				<attribute qualifier="country" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="birthDate" type="java.util.Date">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="cyclistAge" type="java.lang.Integer">
+					<modifiers optional="true" unique="false" />
+					<persistence type="dynamic" attributeHandler="cyclistAgeHandler">
+					</persistence>
+				</attribute>
+				<attribute qualifier="weight" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="high" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+
+			</attributes>
+			</itemtype>
+			<!-- itemtype of Manager table -->
+			
+			<itemtype code="Manager" extends="Person"  autocreate="true" generate="true">
+			<deployment table="Manager" typecode="16987" />
+			</itemtype>
+		
+		
+
+
+
+		<!-- itemtype of Stage table -->
+		
+		<itemtype code="Stage" autocreate="true" generate="true">
+			<deployment table="Stage" typecode="15458" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="stageLength" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="startDate" type="java.util.Date">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="endtDate" type="java.util.Date">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="days" type="java.lang.Integer">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<!-- itemtype of Team table -->
+		
+		<itemtype code="CyclistTeam" autocreate="true" generate="true">
+			<deployment table="CyclistTeam" typecode="15931" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="year" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="manager" type="Manager">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="country" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="bicycle" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				</attributes>
+				</itemtype>
+
+
+
+		<!-- itemtype of StageRanking table -->
+		<itemtype code="StageRanking" autocreate="true" generate="true">
+			<deployment table="StageRanking" typecode="15631" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="time" type="java.lang.Integer">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="position" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="retired" type="java.lang.Boolean">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+		         <attribute qualifier="cyclist" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>		
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CyclistRanking" autocreate="true" generate="true">
+			<deployment table="CyclistRanking" typecode="15673" />
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+					<modifiers optional="false" unique="true" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="cyclist" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="stageRace" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="position" type="java.lang.String">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+				<attribute qualifier="time" type="java.lang.Integer">
+					<modifiers optional="true" unique="false" />
+					<persistence type="property">
+					</persistence>
+				</attribute>
+			</attributes>
+
+	</itemtype>
+	</itemtypes>
+</items>

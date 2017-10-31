@@ -1,0 +1,49 @@
+
+INSERT_UPDATE Cyclist; id[unique=true]; name;             surname;   country;   birthdate[dateformat='dd/MM/yyyy'];  cyclistAge; weight;  high                 
+                         ;1;              Vincenzo         ;Nibali   ;Italy      ;13/11/1976        ;38        ;77      ;180
+                         ;2;               Enrico          ;Gasparotto  ;Italy     ;30/09/1981      ;36        ;80      ;186
+                         ;3;               Luka            ;Pibernik   ;Germany   ;06/03/1989       ;28        ;71      ;177 
+                         ;4;               William          ;Bonnet    ;England    ;05/12/1985      ;33        ;84      ;181         
+                         ;5;               Enrico           ;Battaglin   ;Italy      ;01/01/1990    ;27        ;75      ;168
+                         ;6;               Mikel             ;Landa    ;Sweden       ;2/03/1992     ;25        ;84      ;181     
+                         ;7;               André              ;Greipel   ;France       ;1/1/94      ;23        ;79      ;165    
+                         ;8;               Tom                ;Dumoulin  ;Holland      ;16/8/1997   ;20        ;80      ;183 
+                         ;9;               Stefano            ;Pirazzi   ;Italy        ;09/10/1988  ;29        ;90      ;185      
+                         ;10;              Simone             ;Andretta   ;Italy        ;5/7/1988   ;29        ;84      ;179         
+
+INSERT_UPDATE StageRace; id[unique=true]; name; numberStage; year; endDate[dateformat='dd/MM/yyyy']
+                         ;1;        giroItalia2017; 21;      2017;       31/05/2017
+                                                         
+ INSERT_UPDATE Stage; id[unique=true]; name;         stageLength;          stageRace(id);  startDate[dateformat='dd/MM/yyyy'];     endDate[dateformat='dd/MM/yyyy'];    days  
+                      ;1             ;Alghero-Olbia; 206km;                 1                       ;22/05/2017;                       23/05/2017                          ;1
+                      ;2             ;Olbia-Tortoli; 221km;                 1                       ;24/05/2017;                       25/05/2017                          ;1    
+                      ;3             ;Tortoli-Cagliari;148km;               1                       ;26/05/2017;                        27/05/2017                         ;1
+                      ;4             ;Cefalu-Etna; 181km;                   1                       ;8/05/2017;                        10/05/2017                          ;2  
+                      ;5             ;Pedara_messina; 159km;                1                       ;19/05/2017;                       20/05/2017                          ;1 
+                      ;6             ;Reggiocalabria_termeLuigiane; 127Km;  1                       ;7/05/2017;                        9/05/2017                           ;2                  
+                      ;7             ;Castrovillari-Alberobello; 224km;     1                       ;1/06/2017;                        2/05/2017                           ;1
+                      ;8             ;Molfetta-Peschici;189km;              1                       ;2/05/2017;                        3/05/2017                           ;1                
+                      ;9             ;Montenegro-BlocHaus; 149Km;           1                       ;3/05/2017;                        5/05/2017                           ;2 
+                      ;10            ;Sagrantino-montefalco; 149km;         1                       ;4/05/2017;                        8/05/2017                           ;4 
+                            
+                      
+
+                       
+INSERT_UPDATE StageRanking; id[unique=true];   time;           position ;  retired(code)[default='NO'];  stage(id);           cyclist(id)  
+                            ;2;               2330 ;                6;                        ;2                               ;1 
+                            ;3;               4000 ;                2;                        ;1                               ;2
+                            ;4;               1707 ;                3;                        ;3                               ;3
+                            ;5;               1890 ;                4;                        ;3                               ;2 
+                            ;6;               2260 ;                5;                        ;4                               ;4  
+                            ;7;               7003;                 9;                        ;1                               ;6
+                            ;8;               2380;                 8;                        ;2                               ;6   
+                            
+INSERT_UPDATE CyclistTeam; id[inique=true];  name;           year;   manager;           country;            bicycle 
+                           ;1                ;Soprasteria    ;2017   ;Francesca Di Mare  ;Italy               ;atala  
+                           ;2                ;Biogem          ;2017   ; Francesco Riccardo ;Italy             ;Legnano
+                           ;3                ; Mapei           ;2017   ;Francesco Vietri    ;Italy            ;Dorian
+                           
+INSERT_UPDATE Manager;    id[unique=true];     name;                surname;
+                           ;1                ;Francesca             ;Di Mare
+                           ;2                 ;Francesco             ;Ricky
+                           ;3                 ;Francesco             ;Vietry                                                                                 
