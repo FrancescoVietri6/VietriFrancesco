@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+	
+    <bean id="cycleracingfacadeSystemSetup" class="my.cycleracingfacade.setup.CycleracingfacadeSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="cycleracingfacadeService"/>
+    </bean>
+
+    <bean id="cycleracingfacadeService" class="my.cycleracingfacade.service.impl.DefaultCycleracingfacadeService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+	
+	<bean id="dafaultTeamFacade" class="my.cycleracingfacade.team.facade.impl.DefaultTeamFacade">
+		<property name="teamService" ref="defaultTeamService"/>
+		<property name="cyclistTeamConverter" ref="cyclistTeamConverter"/>
+		<property name="personConverter" ref="defaultPersonConverter"/>
+	</bean>
+	
+	<bean id ="cyclistTeamConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.cycleracingcorefacade.data.CyclistTeamData"/>
+		<property name="populators">
+			<list>
+				<ref bean="teamPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="teamPopulator" class="my.cycleracingfacade.team.populator.TeamPopulator">
+		<property name="managerConverter" ref="defaultManagerConverter"/>
+		<property name="cyclistConverter" ref="defaultCyclistConverter"/>
+	</bean>
+	
+	<bean id="managerPopulator" class="my.cyclistracingfacade.manager.populator.ManagerPopulator"/>
+	
+	<bean id ="defaultManagerConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.cycleracingfacade.data.ManagerData"/>
+		<property name="populators">
+			<list>
+				<ref bean="managerPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="cyclistPopulator" class="my.cycleracingfacade.cyclist.populator.CyclistPopulator"/>
+	<bean id ="defaultCyclistConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.cycleracingfacade.data.CyclistData"/>
+		<property name="populators">
+			<list>
+				<ref bean="cyclistPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="personPopulator" class="my.cycleracingfacade.person.populator.PersonPopulator"/>
+	<bean id ="defaultPersonConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.cycleracingfacade.data.PersonData"/>
+		<property name="populators">
+			<list>
+				<ref bean="personPopulator"/>
+			</list>
+		</property>
+	</bean>
+</beans>
