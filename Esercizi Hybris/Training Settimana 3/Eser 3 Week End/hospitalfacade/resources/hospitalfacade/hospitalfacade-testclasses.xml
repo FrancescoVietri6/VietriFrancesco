@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><hospitalfacade><testclass>my.hospitalfacade.service.impl.DefaultHospitalfacadeServiceIntegrationTest</testclass><testclass>my.hospitalfacade.jalo.HospitalfacadeTest</testclass></hospitalfacade></testclasses>
