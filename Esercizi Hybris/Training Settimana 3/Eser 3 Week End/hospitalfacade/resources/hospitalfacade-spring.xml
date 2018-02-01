@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+    <bean id="hospitalfacadeSystemSetup" class="my.hospitalfacade.setup.HospitalfacadeSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="hospitalfacadeService"/>
+    </bean>
+
+    <bean id="hospitalfacadeService" class="my.hospitalfacade.service.impl.DefaultHospitalfacadeService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <bean id="defaultExaminationFacade" class="my.hospitalfacade.facade.impl.DefaultExaminationFacade">
+    	<property name="examinationService" ref="my.hospitalcore.examination.service.impl.DefaultExaminationService"/>
+    	<property name="examinationConverter" ref="defaultExaminationConverter"/>
+    </bean>
+    
+    <bean name="defaultPersonsConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.hospitalfacade.data.PersonsData" />
+		<property name="populators">
+			<list>
+				<ref bean="defaultPersonsPopulator" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="defaultPersonsPopulator" class="my.hospitalfacade.populators.impl.PersonsPopulator"/>
+	
+    <bean name="defaultPatientConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.hospitalfacade.data.PatientData" />
+		<property name="populators">
+			<list>
+				<ref bean="defaultPatientPopulator"/>
+				<ref bean="defaultPersonsPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="defaultPatientPopulator" class="my.hospitalfacade.populators.impl.PatientPopulator">
+			<property name="examinationConverter" ref="defaultExaminationConverter"/>
+	</bean>
+	
+	<bean name="defaultDoctorConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.hospitalfacade.data.DoctorData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultDoctorPopulator"/>
+				<ref bean="defaultPersonsPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="defaultDoctorPopulator" class="my.hospitalfacade.populators.impl.DoctorPopulator">
+			<property name="examinationConverter" ref="defaultExaminationConverter"/>
+	</bean>
+	
+	<bean name="defaultExaminationConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="my.hospitalfacade.data.ExaminationData" />
+		<property name="populators">
+			<list>
+				<ref bean="defaultExaminationPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="defaultExaminationPopulator" class="my.hospitalfacade.populators.impl.ExaminationPopulator">
+			<property name="examinationConverter" ref="defaultExaminationConverter"/>
+	</bean>		
+</beans>

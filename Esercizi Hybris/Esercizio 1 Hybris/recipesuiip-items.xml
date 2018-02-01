@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype code="CategoryType" autocreate="true" generate="true"
+			      dynamic="true">
+			<value code="FIRST_DISH" />
+			<value code="SECOND_DISH" />
+			<value code="FRUIT" />
+			<value code="DESSERT" />
+		</enumtype>
+	</enumtypes>
+	
+	<relations>
+		<relation code="Author2DishRelation" localized="false" autocreate="true" generate="true">
+			<deployment table="Author2DishRel" typecode="20007"/>
+			<sourceElement qualifier="author" type="Author" cardinality="one"/>
+			<targetElement qualifier="dishes" type="Dish" cardinality="many"/>
+		</relation>
+		<relation code="Category2DishRelation" localized="false" autocreate="true" generate="true">
+			<deployment table="Category2DishRel" typecode="20008"/>
+			<sourceElement qualifier="category" type="Category" cardinality="one"/>
+			<targetElement qualifier="dishes" type="Dish" cardinality="many"/>
+		</relation>
+		<relation code="Dish2IngredientsRelation" localized="false" autocreate="true" generate="true">
+			<deployment table="Dish2IngredientsRel" typecode="20009"/>
+			<sourceElement qualifier="ingredients" type="Ingredient" cardinality="many"/>
+			<targetElement qualifier="dishes" type="Dish" cardinality="many"/>
+		</relation>
+		<relation code="Dish2ToolsRelation" localized="false" autocreate="true" generate="true">
+			<deployment table="Dish2ToolsRel" typecode="20010"/>
+			<sourceElement qualifier="tools" type="Tool" cardinality="many"/>
+			<targetElement qualifier="dishes" type="Dish" cardinality="many"/>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+	
+		<itemtype code="Author" autocreate="true" generate="true">
+			<description>Represents the author of a dish</description>
+			<deployment table="Author" typecode="20000" />
+			<attributes>
+				<attribute qualifier="idAuthor" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="surname" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Category" autocreate="true" generate="true">
+			<description>Represents the category of a dish</description>
+			<deployment table="Category" typecode="20001" />
+			<attributes>
+				<attribute qualifier="idCategory" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="type" type="CategoryType">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Dish" autocreate="true" generate="true">
+			<description>Represents dishes</description>
+			<deployment table="Dish" typecode="20002" />
+			<attributes>
+				<attribute qualifier="idDish" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="time" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="preparation" type="java.lang.String">
+					<description>Represents the dish preparation procedure</description>
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Ingredient" autocreate="true" generate="true">
+			<description>Represents the ingredients of a dish</description>
+			<deployment table="Ingredient" typecode="20003" />
+			<attributes>
+				<attribute qualifier="idIngredient" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="weight" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Tools" autocreate="true" generate="true">
+			<description>Represents tools used for dish preparation</description>
+			<deployment table="Tools" typecode="20004" />
+			<attributes>
+				<attribute qualifier="idTools" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="false"/>
+					<persistence type="property" />
+				</attribute>
+				<attribute qualifier="type" type="java.lang.String">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Dish2IngredientsRelation" autocreate="true" generate="true">
+			<description>Represents the amount of the ingredient for a dish</description>
+			<deployment table="DishHasIngredientsRelation" typecode="20005" />
+			<attributes>
+				<attribute qualifier="amount" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="true" unique="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="index" unique="true">
+					<key attribute="source"/>
+					<key attribute="target"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+		<itemtype code="Dish2ToolsRelation" autocreate="true" generate="true">
+			<description>Represents the amount of the tool for a dish</description>
+			<deployment table="Dish2ToolsRelation" typecode="20006" />
+			<attributes>
+				<attribute qualifier="amount" type="java.lang.Integer">
+					<modifiers read="true" write="true" search="true" optional="true" unique="false" />
+					<persistence type="property" />
+				</attribute>
+			</attributes>
+			<indexes>
+				<index name="index" unique="true">
+					<key attribute="source"/>
+					<key attribute="target"/>
+				</index>
+			</indexes>
+		</itemtype>
+		
+	</itemtypes>
+</items>

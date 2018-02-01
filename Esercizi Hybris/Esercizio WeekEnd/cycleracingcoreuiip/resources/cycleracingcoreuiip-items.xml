@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="items.xsd">
+	
+	<relations>
+		<relation code="StageRace2StageRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="stageRace" type="StageRace" cardinality="one"/>
+			<targetElement qualifier="stages" type="Stage" cardinality="many"/>
+		</relation>
+		<relation code="Stage2StageRankingRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="stage" type="Stage" cardinality="one"/>
+			<targetElement qualifier="stagesRankings" type="StageRanking" cardinality="many"/>
+		</relation>
+		<relation code="Cyclist2StageRankingRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="cyclist" type="Cyclist" cardinality="one"/>
+			<targetElement qualifier="stagesRanking" type="StageRanking" cardinality="many"/>
+		</relation>
+		
+		<relation code="Stage2CyclistRankingRelation" localized="false" autocreate="true" generate="true">
+			<sourceElement qualifier="stage" type="Stage" cardinality="one"/>
+			<targetElement qualifier="cyclistsRanking" type="CyclistRanking" cardinality="many"/>
+		</relation>
+	</relations>
+	
+	<itemtypes>
+		<itemtype code="StageRace" autocreate="true" generate="true">
+			<description></description>
+			<deployment table="StageRace" typecode="20060"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="country" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Stage" autocreate="true" generate="true">
+			<description></description>
+			<deployment table="Stage" typecode="20061"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="stageNumber" type="java.lang.Integer" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="type" type="java.lang.String" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="length" type="java.lang.String" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="date" type="java.util.Date" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="StageRanking" autocreate="true" generate="true">
+			<description></description>
+			<deployment table="StageRanking" typecode="20062"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="time" type="java.lang.Integer" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="position" type="java.lang.Integer" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="retired" type="java.lang.Boolean" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="CyclistRanking" autocreate="true" generate="true">
+			<description></description>
+			<deployment table="CyclistRanking" typecode="20063"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="time" type="java.lang.Integer" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="position" type="java.lang.Integer" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="stageRace" type="StageRace" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="cyclist" type="Cyclist">
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="Cyclist" autocreate="true" generate="true">
+			<description></description>
+			<deployment table="Cyclist" typecode="20064"/>
+			<attributes>
+				<attribute qualifier="id" type="java.lang.String">
+				<modifiers read="true" write="true" search="true" optional="false" unique="true" />
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="name" type="java.lang.String" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="surname" type="java.lang.String" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+				<attribute qualifier="nationality" type="java.lang.String" >
+				<modifiers read="true" write="true" search="true" optional="true"/>
+				<persistence type="property" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+	</itemtypes>
+</items>

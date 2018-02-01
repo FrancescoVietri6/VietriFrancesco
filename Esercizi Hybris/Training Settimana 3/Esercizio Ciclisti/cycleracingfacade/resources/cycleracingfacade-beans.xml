@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="my.cycleracingfacade.data.StageRaceData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="numberStage" type="String"/>
+		<property name="year" type="String"/>
+		<property name="endDate" type="java.util.Date"/>
+		<property name="stages" type="java.util.List&lt;my.cycleracingfacade.data.StageData>"></property>
+	</bean>
+
+	<bean class="my.cycleracingfacade.data.PersonData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="surname" type="String"/>
+	</bean>
+
+	<bean class="my.cycleracingfacade.data.CyclistData" extends="my.cycleracingfacade.data.PersonData">
+		<property name="country" type="String"/>
+		<property name="birthDate" type="java.util.Date"/>
+		<property name="cyclistAge" type="Integer"/>
+		<property name="weight" type="String"/>
+		<property name="high" type="String"/>
+	</bean>
+
+	<bean class="my.cycleracingfacade.data.ManagerData" extends="my.cycleracingfacade.data.PersonData"/>
+
+	<bean class="my.cycleracingfacade.data.StageData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="stageLength" type="String"/>
+		<property name="startDate" type="java.util.Date"/>
+		<property name="endtDate" type="java.util.Date"/>
+		<property name="days" type="Integer"/>
+		<property name="stageRankings" type="java.util.List&lt;my.cycleracingfacade.data.StageRankingData>"></property>
+	</bean>
+
+
+	<bean class="my.cycleracingfacade.data.CyclistTeamData">
+		<property name="id" type="String"/>
+		<property name="name" type="String"/>
+		<property name="year" type="String"/>
+		<property name="manager" type="my.cycleracingfacade.data.ManagerData"/>
+		<property name="country" type="String"/>
+		<property name="bicycle" type="String"/>
+		<property name="cyclists" type="java.util.List&lt;my.cycleracingfacade.data.CyclistData>"/>
+	</bean>
+
+	<bean class="my.cycleracingfacade.data.StageRankingData">
+		<property name="id" type="String"/>
+		<property name="time" type="Integer"/>
+		<property name="position" type="String"/>
+		<property name="retired" type="Boolean"/>
+		<property name="cyclist" type="my.cycleracingfacade.data.CyclistData"/>
+	</bean>
+
+	<bean class="my.cycleracingfacade.data.CyclistRankingData">
+		<property name="id" type="String"/>
+		<property name="cyclist" type="my.cycleracingfacade.data.CyclistData"/>
+		<property name="stageRace" type="my.cycleracingfacade.data.StageRaceData"/>
+		<property name="position" type="String"/>
+		<property name="time" type="Integer"/>
+	</bean>
+
+
+	
+
+</beans>

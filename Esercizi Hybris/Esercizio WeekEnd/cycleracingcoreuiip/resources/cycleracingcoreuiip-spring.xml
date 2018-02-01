@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+    <bean id="cycleracingcoreuiipSystemSetup" class="my.cycleracingcoreuiip.setup.CycleracingcoreuiipSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="cycleracingcoreuiipService"/>
+    </bean>
+
+    <bean id="cycleracingcoreuiipService" class="my.cycleracingcoreuiip.service.impl.DefaultCycleracingcoreuiipService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+    
+    <bean id="defaultStageRaceDao" class="my.cycleracingcoreuiip.stagerace.dao.imp.DefaultStageRaceDao" parent="abstractItemDao"/>
+    <bean id="defaultStageRaceService" class="my.cycleracingcoreuiip.stagerace.service.imp.DefaultStageRaceService">
+    	<property name="stageRaceDao" ref="defaultStageRaceDao"/>
+    </bean>
+		
+	<bean id="defaultStageDao" class="my.cycleracingcoreuiip.stage.dao.imp.DefaultStageDao" parent="abstractItemDao"/>
+	<bean id="defaultStageService" class="my.cycleracingcoreuiip.stage.service.imp.DefaultStageService">
+		<property name="stageDao" ref="defaultStageDao"></property>
+	</bean>	
+		
+	<bean id="defaultStageRankingDao" class="my.cycleracingcoreuiip.stageranking.dao.imp.DefaultStageRankingDao" parent="abstractItemDao"/>
+	<bean id="defaultStageRankingService" class="my.cycleracingcoreuiip.stageranking.service.imp.DefaultStafeRankingService">
+		<property name="stageRankingDao" ref="defaultStageRankingDao"></property>
+	</bean>	
+	
+	<bean id="defaultCyclistRankingDao" class="my.cycleracingcoreuiip.cyclistranking.dao.imp.DafaultCyclistRankingDao" parent="abstractItemDao"/>
+	<bean id="defaultCyclistRankingService" class="my.cycleracingcoreuiip.cyclistranking.service.imp.DefaultCyclistRankingService">
+		<property name="cyclistRankingDao" ref="defaultCyclistRankingDao"/>
+	</bean>
+	
+	<!-- Interceptor -->
+	
+	<bean id="myInitStageInterceptor" class="my.cycleracingcoreuiip.interceptor.imp.MyInitStageInterceptor"/>
+	<bean id="myInitMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping ">
+		<property name="interceptor" ref="myInitStageInterceptor"/>
+		<property name="typeCode" value="Stage"/>
+		<property name="order" value="1"/>
+	</bean>
+	
+	
+	<!-- CronJob -->
+	<bean id="myJob" class="my.cycleracingcoreuiip.cronjob.imp.MyJob" parent="abstractJobPerformable">
+		<property name="stageRankingDao" ref="defaultStageRankingDao"/>
+		<property name="stageRaceDao" ref="defaultStageRaceDao"/>
+		<property name="stageDao" ref="defaultStageDao"/>
+		<property name="cyclistRankingDao" ref="defaultCyclistRankingDao"/>
+	</bean>
+	
+	<bean id="csvRankingEventListener" class="my.cyclistracingcoreuiip.event.imp.CSVRankingEventListener">
+		<property name="cyclistRankingDao" ref="defaultCyclistRankingDao"></property>
+	</bean>
+	
+</beans>

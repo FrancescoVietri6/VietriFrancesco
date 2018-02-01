@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+	
+    <bean id="hospitalcoreSystemSetup" class="my.hospitalcore.setup.HospitalcoreSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="hospitalcoreService"/>
+    </bean>
+
+    <bean id="hospitalcoreService" class="my.hospitalcore.service.impl.DefaultHospitalcoreService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+			
+	<!-- Bean For Days Handler -->		
+	<bean id="daysHandler" class="my.hospitalcore.handler.impl.DaysHandler"/>	
+	
+	<!-- Bean for Dao+Service for itemType Examination-->
+	
+	<bean id="defaultExaminationDao" class="my.hospitalcore.examination.dao.impl.DefaultExaminationDao" parent="abstractItemDao"/>
+	
+	<bean id="defaultExaminationService" class="my.hospitalcore.examination.service.impl.DefaultExaminationService">
+		<property name="examinationDao" ref="defaultExaminationDao"/>
+	</bean>
+	
+	<!-- Bean for ValidateExaminationResultInterceptor -->
+	<bean id="validateExaminationResultInterceptor" class="my.hospitalcore.interceptors.examination.impl.ValidateExaminationResultInterceptor"/>
+	<bean id="myInitMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping ">
+		<property name="interceptor" ref="validateExaminationResultInterceptor"/>
+		<property name="typeCode" value="Examination"/>
+	</bean>
+	
+	<!-- Bean for ExaminationResultEventListener -->
+	<bean id="examinationResultEventListener" class="my.hospitalcore.examination.eventlistener.impl.ExaminationResultEventListener" parent="abstractEventListener">
+		<property name="examinationService" ref="defaultExaminationService"/>
+	</bean>
+	
+	<!-- Bean for BookingListExaminationJob -->
+	<bean id="bookingListExaminationJob" class="my.hospitalcore.cronjob.impl.BookingListExaminationJob" parent="abstractJobPerformable">
+		<property name="examinationService" ref="defaultExaminationService"/>
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~ 
+  ~ Copyright (c) 2000-2016 SAP SE
+  ~ All rights reserved.
+  ~ 
+  ~ This software is the confidential and proprietary information of SAP 
+  ~ Hybris ("Confidential Information"). You shall not disclose such 
+  ~ Confidential Information and shall use it only in accordance with the 
+  ~ terms of the license agreement you entered into with SAP Hybris.
+  -->
+
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+	<bean class="my.hospitalfacade.data.HospitalData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="city" type="String"/>
+		<property name="departments" type="java.util.List&lt;my.hospitalfacade.data.DepartmentData>"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.PersonsData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+		<property name="surname" type="String"/>
+		<property name="fc" type="String"/>
+		<property name="birthDate" type="java.util.Date"/>
+		<property name="birthPlace" type="String"/>
+		<property name="gender" type="Enum"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.PatientData" extends="my.hospitalfacade.data.PersonsData">
+		<property name="examinations" type="java.util.List&lt;my.hospitalfacade.data.ExaminationData>"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.DoctorData">
+		<property name="registerNumber" type="String"/>
+		<property name="examinations" type="java.util.List&lt;my.hospitalfacade.data.ExaminationData>"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.DepartmentData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.ExaminationData">
+		<property name="code" type="String"/>
+		<property name="date" type="java.util.Date"/>
+		<property name="result" type="Enum"/>
+		<property name="infos" type="String"/>
+		<property name='patient' type="my.hospitalfacade.data.PatientData"/>
+		<property name='doctor' type="my.hospitalfacade.data.DoctorData"/>
+	</bean>
+	
+	<bean class="my.hospitalfacade.data.HospitalizationData">
+		<property name="code" type="String"/>
+		<property name="dateIn" type="java.util.Date"/>
+		<property name="dateOut" type="java.util.Date"/>
+		<property name="days" type="Integer"/>
+		<property name="patient" type="my.hospitalfacade.data.PatientData"/>
+	</bean>
+</beans>

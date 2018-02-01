@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	
+    <bean id="cycleracingcoreSystemSetup" class="my.cycleracingcore.setup.CycleracingcoreSystemSetup">
+        <!-- constructor arg injection example -->
+        <constructor-arg ref="cycleracingcoreService"/>
+    </bean>
+
+    <bean id="cycleracingcoreService" class="my.cycleracingcore.service.impl.DefaultCycleracingcoreService">
+        <!-- setter injection example -->
+        <property name="modelService" ref="modelService"/>
+        <property name="mediaService" ref="mediaService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+			
+	<bean id="cyclistAgeHandler" class="my.cyclistracingcore.handler.impl.CyclistAgeHandler"/>
+	
+	<bean id="defaultStageDao" class="my.cyclistracingcore.stage.dao.impl.DefaultStageDao" parent="abstractItemDao"/>
+	<bean id="defaultStageService" class="my.cyclistracingcore.stage.service.impl.DefaultStageService">
+		<property name="stageDao" ref="defaultStageDao"/>
+	</bean>
+	
+	<bean id="stageRacePrepareInterceptor" class="my.cyclistracingcore.interceptor.impl.StageRacePrepareInterceptor">
+		<property name="stageService" ref="defaultStageService"/>
+	</bean>
+	<bean id="stageRacePrepareMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+		<property name="interceptor" ref="stageRacePrepareInterceptor"/>
+		<property name="typeCode" value="StageRace"/>
+	</bean>
+	
+	<bean id="defaultTeamDao" class="my.cycleracingcore.team.dao.impl.DefaultTeamDao" parent="abstractItemDao"/>
+	
+	<bean id="defaultTeamService" class="my.cycleracingcore.team.service.impl.DefaultTeamService">
+		<property name="teamDao" ref="defaultTeamDao"/>
+	</bean>
+	
+</beans>
